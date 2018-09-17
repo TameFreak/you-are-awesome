@@ -51,11 +51,28 @@ class helpAsyncIncrementor{
 const createIncrementer = () => {return new helpAsyncIncrementor()};
 
 // return same argument not earlier than in one second, and not later, than in two
-const returnBackInSecond = () => {};
-const getDeepPropertiesCount = () => {};
-const createSerializedObject = () => {};
+const returnBackInSecond = (par) => {
+    return new Promise((resolve) => {setTimeout(() => {resolve(par)}, 1001);});
+};
+
+const getDeepPropertiesCount = (thisObject) => {
+    let counter = 0;
+
+    const foo = (obj) => {
+        for (let key in obj){
+            counter++;
+            foo(obj[key]);
+        }
+
+        return counter;
+    }
+
+    return foo(thisObject);
+};
+
+const createSerializedObject = () => {return new Number(1)};
 const toBuffer = () => {};
-const sortByProto = () => {};
+const sortByProto = (arr) => {return arr.sort()};
 
 exports.createEnumerableProperty = createEnumerableProperty;
 exports.createNotEnumerableProperty = createNotEnumerableProperty;
